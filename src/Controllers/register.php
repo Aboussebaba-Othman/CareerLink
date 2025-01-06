@@ -1,29 +1,23 @@
 <?php
+require_once '../Controllers/RegisterController.php';
 
-namespace App\Controllers;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $registerController = new RegisterController();
 
-use App\Classes\Users;
+    $response = $registerController->register([
+        'nom' => $_POST['Last_name'],
+        'prenom' => $_POST['First_name'],
+        'email' => $_POST['email'],
+        'password' => $_POST['password'],
+        'role_id' => $_POST['role_id'],
+        'skills' => $_POST['skills'] ?? null,
+        'nom_entreprise' => $_POST['company_name'] ?? null
+    ]);
 
-class RegisterController
-{
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = new Users();
-    }
-
-    public function register($data)
-    {
-        if (isset($data['nom'], $data['prenom'], $data['email'], $data['password'], $data['role_id'])) {
-            return $this->user->create(
-                $data['nom'],
-                $data['prenom'],
-                $data['email'],
-                $data['password'],
-                $data['role_id']
-            );
-        }
-        return "Tous les champs sont obligatoires.";
+    if ($response['success']) {
+        header('Location: login.php');
+        exit();
+    } else {
+        echo $response['message'];
     }
 }

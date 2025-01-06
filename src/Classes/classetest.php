@@ -6,7 +6,7 @@ class classetest {
 
     public function __construct(){
         
-        echo 'keltoum' ;
+        echo 'othman' ;
     }
 
 
