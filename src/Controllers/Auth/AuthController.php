@@ -17,7 +17,7 @@ class AuthController{
             echo "user not found please check ...";
         }
         else{
-            if($user->getRole()->getTitle() == "admin")
+            if($user->getRole()->getTitle() == "Admin")
             {
                 header("Location:../admin/home.php");
             }

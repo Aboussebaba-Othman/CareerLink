@@ -22,7 +22,6 @@ if(isset($_POST["submit"]))
     }
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +42,7 @@ if(isset($_POST["submit"]))
                         Sign in
                     </h1>
                 </div>
-                <form class="space-y-6">
+                <form class="space-y-6"  action="" method="POST">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                         <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
@@ -65,7 +64,7 @@ if(isset($_POST["submit"]))
                         </div>
                     </div>
                     <div>
-                        <button data-testid="login" type="submit"
+                        <button data-testid="login" name="submit" type="submit"
                             class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-700 dark:border-transparent dark:hover:bg-indigo-600 dark:focus:ring-indigo-400 dark:focus:ring-offset-2 disabled:cursor-wait disabled:opacity-50">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"

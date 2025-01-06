@@ -7,17 +7,20 @@ use App\Config\DatabaseConnection;
 use PDO;
 
 class UserModel{
-    private $connexion;
+    private $connexion; 
 
     public function __construct() {
-            $db = new Database();
-            $this->connexion = $db->connection();
+            $db = new DatabaseConnection();
+            $this->connexion = $db->connect();
     }
 
     public function findUserByEmailAndPassword($email, $password){
-        $query = "SELECT users.id , users.email , users.password , role.id as role_id , nom_role as `role`
-        FROM users join role on role.id = users.role_id where users.email = :email and users.password = :password";        
-   
+        $query = "SELECT users.id, users.email, users.password, roles.id as role_id, roles.nom_role as `role`
+        FROM users 
+        JOIN roles ON roles.id = users.role_id 
+        WHERE users.email = :email AND users.password = :password";
+
+
         $stmt = $this->connexion->prepare($query); 
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password);

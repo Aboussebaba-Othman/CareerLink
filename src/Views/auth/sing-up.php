@@ -1,3 +1,29 @@
+<?php
+
+require_once("../../../vendor/autoload.php");
+use App\Controllers\Auth\AuthController;
+
+
+
+if(isset($_POST["submit"]))
+{
+
+    if(empty($_POST["First_name"]) &&  empty($_POST["Last_name"]) && empty($_POST["email"]) && empty($_POST["password"]) )
+    {
+        echo "is empty";
+    }
+    else{
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $authController = new AuthController();
+        $authController->login($email, $password);
+
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
