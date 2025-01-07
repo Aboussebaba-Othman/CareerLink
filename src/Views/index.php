@@ -10,11 +10,6 @@ $db = new DatabaseConnection();
 $connexion = $db->connect();
 
 use App\Controllers\RegistrationController;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller = new RegistrationController($conn);
-    $message = $controller->register($_POST);
-    echo $message;
-}
 
 ?>
 <!DOCTYPE html>
