@@ -121,7 +121,7 @@ if(isset($_POST["submit"]))
                 </div>
                 <div class="m-auto mt-6 w-fit md:mt-8">
                     <span class="m-auto dark:text-gray-400">Don't have an account?
-                        <a class="font-semibold text-indigo-600 dark:text-indigo-100" href="sing-up.php">Create Account</a>
+                        <a class="font-semibold text-indigo-600 dark:text-indigo-100" href="register.php">Create Account</a>
                     </span>
                 </div>
             </div>

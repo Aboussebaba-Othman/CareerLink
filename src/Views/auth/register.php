@@ -1,28 +1,15 @@
 <?php
-
 require_once("../../../vendor/autoload.php");
-use App\Controllers\Auth\AuthController;
+require '../../../src/Controllers/Auth/RegisterController.php';
 
+use App\Controllers\Auth\RegisterController;
 
-
-if(isset($_POST["submit"]))
-{
-
-    if(empty($_POST["First_name"]) &&  empty($_POST["Last_name"]) && empty($_POST["email"]) && empty($_POST["password"]) )
-    {
-        echo "is empty";
-    }
-    else{
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-
-        $authController = new AuthController();
-        $authController->login($email, $password);
-
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $registerController = new RegisterController();
+    $registerController->register($_POST);
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,15 +28,15 @@ if(isset($_POST["submit"]))
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Create an account
               </h1>
-                <form class="space-y-4 md:space-y-6" action="../../src/Controllers/register.php" method="POST">
+                <form class="space-y-4 md:space-y-6" action="" method="POST">
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                            <label for="First_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-                            <input type="text" name="First_name" id="First_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                            <input type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         </div>
                         <div>
-                            <label for="Last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                            <input type="text" name="Last_name" id="Last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+                            <input type="text" name="prenom" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         </div>
                     </div>
                     
@@ -103,10 +90,10 @@ if(isset($_POST["submit"]))
         const skillsContainer = document.getElementById('skills-container');
         const companyContainer = document.getElementById('company-container');
 
-        if (role === "condidat") {
+        if (role === "candidate") {
             skillsContainer.classList.remove('hidden');
             companyContainer.classList.add('hidden');
-        } else if (role === "recruteur") { 
+        } else if (role === "recruiter") { 
             companyContainer.classList.remove('hidden');
             skillsContainer.classList.add('hidden');
         } else {

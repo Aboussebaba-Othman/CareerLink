@@ -15,15 +15,16 @@ class UserModel{
     }
 
     public function findUserByEmailAndPassword($email, $password){
+
         $query = "SELECT users.id, users.email, users.password, roles.id as role_id, roles.nom_role as `role`
         FROM users 
         JOIN roles ON roles.id = users.role_id 
-        WHERE users.email = :email AND users.password = :password";
-
-
+        WHERE users.email = :email";
+    // AND users.password = :password
+        // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $this->connexion->prepare($query); 
         $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $password);
+        // $stmt->bindParam(":password", $hashedPassword);
         $stmt->execute();
         
          $row = $stmt->fetch(PDO::FETCH_ASSOC);
