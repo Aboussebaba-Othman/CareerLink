@@ -1,20 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../Config/DatabaseConnection.php';
-require_once __DIR__ . '/../Models/User.php';
-require_once __DIR__ . '/../Models/Role.php';
-require_once  __DIR__ . '/../Controllers/RegistrationController.php';
 
 use App\Config\DatabaseConnection;
 $db = new DatabaseConnection();
 $connexion = $db->connect();
-
-use App\Controllers\RegistrationController;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller = new RegistrationController($conn);
-    $message = $controller->register($_POST);
-    echo $message;
-}
 
 ?>
 <!DOCTYPE html>

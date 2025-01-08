@@ -1,3 +1,40 @@
+
+<?php
+require_once __DIR__ . '../../../Config/DatabaseConnection.php';
+
+use App\Config\DatabaseConnection;
+
+$db = new DatabaseConnection();
+$connexion = $db->connect();
+
+$totalUsers = $conn->query("SELECT COUNT(*) AS count FROM users")->fetch(PDO::FETCH_ASSOC)['count'];
+$totalTags = $conn->query("SELECT COUNT(*) AS count FROM tags")->fetch(PDO::FETCH_ASSOC)['count'];
+$totalCategories = $conn->query("SELECT COUNT(*) AS count FROM categories")->fetch(PDO::FETCH_ASSOC)['count'];
+$totalRoles = $conn->query("SELECT COUNT(*) AS count FROM roles")->fetch(PDO::FETCH_ASSOC)['count'];
+
+if (isset($_POST['saveTag'])) {
+    $tagName = trim($_POST['tagName']);
+
+    if (!empty($tagName)) {
+        try {
+            $stmt = $connexion->prepare("INSERT INTO tags (name) VALUES (:name)");
+            $stmt->bindParam(':name', $tagName, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Tag added successfully!');</script>";
+            } else {
+                echo "<script>alert('Error adding tag.');</script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>alert('Error adding tag: " . $e->getMessage() . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Tag name cannot be empty.');</script>";
+    }
+}
+
+$connexion = null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +96,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
                     <div class="p-4 bg-blue-500 text-white rounded shadow-md">
                         <h2 class="text-lg font-semibold">Total Users</h2>
-                        <p class="mt-2 text-2xl font-bold">1,245</p>
+                        <p class="mt-2 text-2xl font-bold"><?= $totalUsers ?></p>
                     </div>
                     <div class="p-4 bg-green-500 text-white rounded shadow-md">
                         <h2 class="text-lg font-semibold">Total Tags</h2>
@@ -104,6 +141,7 @@
                                 <a href="#" class="text-red-500 hover:underline">Delete</a>
                             </td>
                         </tr>
+                        
                     </tbody>
                 </table>
             </section>
