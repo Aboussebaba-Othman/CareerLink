@@ -46,9 +46,7 @@ class RegisterModel {
 
             $this->connexion->commit();
             return true;
-        } catch (\Exception $e) {
-            $this->connexion->rollBack();
-            error_log($e->getMessage());
+        } catch (Exception $e) {
             return $e->getMessage(); 
         }
     }
