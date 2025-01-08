@@ -1,13 +1,13 @@
 
 <?php
 require_once("../../../../vendor/autoload.php");
-require '../../../../src/Controllers/Auth/RegisterController.php';
+
 
 use App\Controllers\Admin\CategoriesConttroller;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $CategoriesConttroller = new CategoriesConttroller();
-    $CategoriesConttroller->Categorie($_POST);
+    $categoriesConttroller = new CategoriesConttroller();
+    $categoriesConttroller->Categorie($postData);
 }
 ?>
 
