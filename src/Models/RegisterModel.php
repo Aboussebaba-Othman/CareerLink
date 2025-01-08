@@ -28,7 +28,7 @@ class RegisterModel {
             $stmt->execute();
 
             $userId = $this->connexion->lastInsertId();
-
+            return $userId;
             
             if ($roleId == 1 && $skills) { 
                 $candidateQuery = "INSERT INTO candidats (skills, user_id) VALUES (:skills, :user_id)";
@@ -44,8 +44,8 @@ class RegisterModel {
                 $stmt->execute();
             }
 
-            $this->connexion->commit();
-            return true;
+            // $this->connexion->commit();
+            // return true;
         } catch (Exception $e) {
             return $e->getMessage(); 
         }

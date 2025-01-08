@@ -12,12 +12,30 @@ class CategoryModel {
         $db = new DatabaseConnection();
         $this->connexion = $db->connect();
     }
-
+    public function getAllCategories() {
+        try {
+            $query = "SELECT * FROM categories";
+            $stmt = $this->connexion->prepare($query);
+            $stmt->execute();
+            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            
+            return $categories;
+        } catch (Exception $e) {
+            echo "Erreur lors de la récupération des catégories : " . $e->getMessage();
+            return []; 
+        }
+    }
+    
+    
+    
+    
+    
+    
     public function createCategory($nom) {
         try {
-            $this->connexion->beginTransaction();
 
-            
+
             $userQuery = "INSERT INTO categories (nom) 
                           VALUES (:nom)";
             $stmt = $this->connexion->prepare($userQuery);
@@ -25,11 +43,31 @@ class CategoryModel {
             $stmt->execute();
 
             $userId = $this->connexion->lastInsertId();
-
-            $this->connexion->commit();
-            return true;
+             return $userId ;
         } catch (Exception $e) {
             return $e->getMessage(); 
         }
     }
+    public function updateCategory($id, $nom) {
+        try {
+            $query = "UPDATE categories SET nom = :nom WHERE id = :id";
+            $stmt = $this->connexion->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->execute();
+    
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                echo "No rows updated. Category ID might not exist.";
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Error updating category: " . $e->getMessage();
+            return false;
+        }
+    }
+    
 }
+
+

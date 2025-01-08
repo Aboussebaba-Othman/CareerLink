@@ -70,7 +70,7 @@ $totaloffresemploi = $connexion->query("SELECT COUNT(*) AS count FROM offresempl
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded" data-target="manage-categories">
+                        <a href="../admin/Categories/dash.php" class="block px-4 py-2 hover:bg-gray-700 rounded" data-target="manage-categories">
                             <i class="fas fa-folder-open mr-2"></i> Manage Categories
                         </a>
                     </li>
@@ -122,7 +122,7 @@ $totaloffresemploi = $connexion->query("SELECT COUNT(*) AS count FROM offresempl
             </section>
 
            
-            <section id="manage-tags" class="hidden">
+            <!-- <section id="manage-tags" class="hidden">
                 <h1 class="text-2xl font-semibold text-gray-700 mb-4">Manage Tags</h1>
                 <button id="addTagBtn" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="openModal('addTagModal')">
                     Add New Tag
@@ -151,11 +151,11 @@ $totaloffresemploi = $connexion->query("SELECT COUNT(*) AS count FROM offresempl
                         </tr>
                     </tbody>
                 </table>
-            </section>
+            </section> -->
 
          
-            <section id="manage-categories" class="hidden">
-                <h1 class="text-2xl font-semibold text-gray-700 mb-4">Manage Categories</h1>
+            <!-- <section id="manage-categories" class="hidden">
+                <a href=""><h1 class="text-2xl font-semibold text-gray-700 mb-4">Manage Categories</h1></a>
                 <button id="addCategoryBtn" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="openModal('addCategoryModal')">
                     Add New Category
                 </button>
@@ -186,7 +186,7 @@ $totaloffresemploi = $connexion->query("SELECT COUNT(*) AS count FROM offresempl
                         </tr>
                     </tbody>
                 </table>
-            </section>
+            </section> -->
 
            
             <section id="manage-roles" class="hidden">
