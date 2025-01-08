@@ -1,11 +1,13 @@
 
 <?php
+
 require_once __DIR__ . '../../../Config/DatabaseConnection.php';
 
 use App\Config\DatabaseConnection;
 
 $db = new DatabaseConnection();
 $connexion = $db->connect();
+
 
 $totalUsers = $conn->query("SELECT COUNT(*) AS count FROM users")->fetch(PDO::FETCH_ASSOC)['count'];
 $totalTags = $conn->query("SELECT COUNT(*) AS count FROM tags")->fetch(PDO::FETCH_ASSOC)['count'];
@@ -34,7 +36,16 @@ if (isset($_POST['saveTag'])) {
 }
 
 $connexion = null;
+
+
+$totalUsers = $connexion->query("SELECT COUNT(*) AS count FROM users")->fetch(PDO::FETCH_ASSOC)['count'];
+$totalCandidats = $connexion->query("SELECT COUNT(*) AS count FROM candidats")->fetch(PDO::FETCH_ASSOC)['count'];
+$totalRecruteurs = $connexion->query("SELECT COUNT(*) AS count FROM recruteurs")->fetch(PDO::FETCH_ASSOC)['count'];
+$totaloffresemploi = $connexion->query("SELECT COUNT(*) AS count FROM offresemploi")->fetch(PDO::FETCH_ASSOC)['count'];
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,16 +110,19 @@ $connexion = null;
                         <p class="mt-2 text-2xl font-bold"><?= $totalUsers ?></p>
                     </div>
                     <div class="p-4 bg-green-500 text-white rounded shadow-md">
-                        <h2 class="text-lg font-semibold">Total Tags</h2>
-                        <p class="mt-2 text-2xl font-bold">120</p>
+
+
+                        <h2 class="text-lg font-semibold">Total Candidats</h2>
+                        <p class="mt-2 text-2xl font-bold"><?= $totalCandidats ?></p>
                     </div>
                     <div class="p-4 bg-yellow-500 text-white rounded shadow-md">
-                        <h2 class="text-lg font-semibold">Categories</h2>
-                        <p class="mt-2 text-2xl font-bold">45</p>
+                        <h2 class="text-lg font-semibold">Total Recruiters</h2>
+                        <p class="mt-2 text-2xl font-bold"><?= $totalRecruteurs ?></p>
                     </div>
                     <div class="p-4 bg-red-500 text-white rounded shadow-md">
-                        <h2 class="text-lg font-semibold">Roles</h2>
-                        <p class="mt-2 text-2xl font-bold">5</p>
+                        <h2 class="text-lg font-semibold">Total offres emploi</h2>
+                        <p class="mt-2 text-2xl font-bold"><?= $totaloffresemploi ?></p>
+
                     </div>
                 </div>
             </section>
@@ -141,7 +155,6 @@ $connexion = null;
                                 <a href="#" class="text-red-500 hover:underline">Delete</a>
                             </td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </section>
@@ -229,6 +242,7 @@ $connexion = null;
                         <tr class="hover:bg-gray-100">
                             <td class="px-4 py-2">Othman Aboussebaba</td>
                             <td class="px-4 py-2">Othman@example.com</td>
+
                             <td class="px-4 py-2">Recruiter</td>
                             <td class="px-4 py-2">
                                 <a href="#" class="text-blue-500 hover:underline">Edit</a> |
@@ -265,26 +279,6 @@ $connexion = null;
     </div>
 </div>
 
-
-<div id="addCategoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
-        <h2 class="text-xl font-bold mb-4">Add New Category</h2>
-        <form>
-            <div class="mb-4">
-                <label for="categoryName" class="block text-gray-700 font-medium mb-2">Category Name</label>
-                <input type="text" id="categoryName" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter category name">
-            </div>
-            <div class="mb-4">
-                <label for="categoryDescription" class="block text-gray-700 font-medium mb-2">Description</label>
-                <textarea id="categoryDescription" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter category description"></textarea>
-            </div>
-            <div class="flex justify-end space-x-4">
-                <button type="button" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400" onclick="closeModal('addCategoryModal')">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Save</button>
-            </div>
-        </form>
-    </div>
-</div>
 
     </div>
 
