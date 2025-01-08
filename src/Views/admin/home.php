@@ -9,11 +9,6 @@ $db = new DatabaseConnection();
 $connexion = $db->connect();
 
 
-$totalUsers = $conn->query("SELECT COUNT(*) AS count FROM users")->fetch(PDO::FETCH_ASSOC)['count'];
-$totalTags = $conn->query("SELECT COUNT(*) AS count FROM tags")->fetch(PDO::FETCH_ASSOC)['count'];
-$totalCategories = $conn->query("SELECT COUNT(*) AS count FROM categories")->fetch(PDO::FETCH_ASSOC)['count'];
-$totalRoles = $conn->query("SELECT COUNT(*) AS count FROM roles")->fetch(PDO::FETCH_ASSOC)['count'];
-
 if (isset($_POST['saveTag'])) {
     $tagName = trim($_POST['tagName']);
 
@@ -35,7 +30,6 @@ if (isset($_POST['saveTag'])) {
     }
 }
 
-$connexion = null;
 
 
 $totalUsers = $connexion->query("SELECT COUNT(*) AS count FROM users")->fetch(PDO::FETCH_ASSOC)['count'];
